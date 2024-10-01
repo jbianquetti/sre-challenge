@@ -5,6 +5,8 @@ on:
     # branches:
     #   - main
   workflow_dispatch:
+    # branches:
+    #   - main
 
 permissions:
   contents: read
@@ -30,12 +32,24 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         # with:
-          # terraform_version: 1.5.7
+        # terraform_version: 1.5.7
       - name: Terraform init and validate
         run: |
           terraform init
-        
+
       - name: Terraform plan
         run: |
           terraform plan
-        
+
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: ${{ github.actor }}
+          minimum-approvals: 1
+          issue-title: "Deploying v1.0.0 to prod"
+          issue-body: "Review the terraform plan, then approve or deny the deployment of v1.0.0 to prod."
+          exclude-workflow-initiator-as-approver: false
+
+      - name: Terraform apply
+        run: |
+          terraform apply
