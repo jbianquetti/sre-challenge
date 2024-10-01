@@ -65,5 +65,5 @@ jobs:
 
       - name: Push the Docker image
         run: |
-            docker tag ghcr.io/${{ github.repository }}/sre-challenge-app:latest
+            docker tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} ghcr.io/${{ github.repository }}/sre-challenge-app:latest
             docker push ghcr.io/${{ github.repository }}/sre-challenge-app:latest
