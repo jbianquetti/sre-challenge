@@ -46,7 +46,7 @@ jobs:
           cd ./src
           docker build \
             --build-arg NODE_ENV=production \
-            -t ghcr.io/${{ github.repository }}/sre-challenge-app:latest \
+            -t ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} \
             -f Dockerfile .
 
       - name: Push the Docker image
