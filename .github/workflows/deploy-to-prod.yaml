@@ -1,0 +1,43 @@
+name: Terraform PROD Deployment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  gcp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git Repository
+        uses: actions/checkout@v3.0.0
+        with:
+          fetch-depth: 0
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GOOGLE_CREDENTIALS }}"
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        # with:
+          # terraform_version: 1.5.7
+      - name: Terraform init and validate
+        run: |
+          terraform init
+        
+      - name: Terraform plan
+        run: |
+          terraform plan
+        
