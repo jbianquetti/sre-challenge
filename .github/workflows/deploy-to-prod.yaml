@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-  workflow_run:
-    workflows: ["Build and Publish Docker Image"]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: ["Build and Publish Docker Image"]
+  #   types:
+  #     - completed
 
 permissions:
   contents: read
