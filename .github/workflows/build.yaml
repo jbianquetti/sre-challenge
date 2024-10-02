@@ -8,6 +8,7 @@ permissions:
   packages: write
   attestations: write
   id-token: write
+  issues: writ
 
 jobs:
   build:
