@@ -2,11 +2,9 @@ name: Terraform PROD Deployment
 
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
   workflow_dispatch:
-    # branches:
-    #   - main
 
 permissions:
   contents: read
@@ -31,14 +29,9 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
-        # with:
-        # terraform_version: 1.5.7
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
-
-      - name: "Use gcloud CLI"
-        run: "gcloud info"
 
       - name: install google-cloud-sdk-gke-gcloud-auth-plugin
         run: |
