@@ -16,6 +16,7 @@ permissions:
 jobs:
   gcp-deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout Git Repository
         uses: actions/checkout@v3.0.0
