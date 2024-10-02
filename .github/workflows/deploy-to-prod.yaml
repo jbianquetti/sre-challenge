@@ -5,7 +5,7 @@ on:
     branches:
       - main
   workflow_run:
-    workflows: ["build"]
+    workflows: ["Build and Publish Docker Imag"]
     types:
       - completed
 
