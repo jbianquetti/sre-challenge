@@ -24,4 +24,23 @@ gcloud iam service-accounts keys create "key.json" \
 ```
 
 3. Upload the contents of this file as a GitHub Actions Secret.
-Use the name of the GitHub Actions secret as the credentials_json value in the GitHub Actions YAML:
+Use the name of the GitHub Actions secret as the credentials_json value in the GitHub Actions YAML
+
+4. Enable APIs
+
+In order to operate with the Service Account you must activate the following APIs on the project where the Service Account was created:
+
+    Compute Engine API - compute.googleapis.com
+    Kubernetes Engine API - container.googleapis.com
+
+```bash
+gcloud services enable compute.googleapis.com
+gcloud services enable container.googleapis.com
+```
+5. Run Terraform code
+
+6. Install the plugin to get credentials from GKE
+```bash
+gcloud components install gke-gcloud-auth-plugin
+gcloud container clusters get-credentials ${PROJECT_ID}-gke --region us-central1
+```

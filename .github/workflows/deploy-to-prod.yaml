@@ -36,6 +36,7 @@ jobs:
       - name: Terraform init and validate
         run: |
           terraform init
+          terraform validate
 
       - name: Terraform plan
         run: |
@@ -52,4 +53,4 @@ jobs:
 
       - name: Terraform apply
         run: |
-          terraform apply
+          terraform apply -auto-approve
