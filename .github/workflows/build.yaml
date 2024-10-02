@@ -62,9 +62,9 @@ jobs:
           secret: ${{ github.TOKEN }}
           approvers: ${{ github.actor }}
           minimum-approvals: 1
-          issue-title: "About to tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} as latest"
-          issue-body: "Do you want to tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} as ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}"
-          exclude-workflow-initiator-as-approver: fals
+          issue-title: "Tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} as latest"
+          issue-body: "Do you want to tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} as ghcr.io/${{ github.repository }}/sre-challenge-app:latest"
+          exclude-workflow-initiator-as-approver: false
 
       - name: Push the Docker image
         run: |
