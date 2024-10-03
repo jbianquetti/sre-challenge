@@ -25,6 +25,7 @@ jobs:
         with:
           repository: hello-umi/sre-challenge
           ref: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tagging ${{ github.sha }} as lastest
         run: |

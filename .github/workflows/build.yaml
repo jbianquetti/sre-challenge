@@ -22,6 +22,7 @@ jobs:
         with:
           repository: hello-umi/sre-challenge
           ref: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Checkov GitHub Action
       #   uses: bridgecrewio/checkov-action@v12
