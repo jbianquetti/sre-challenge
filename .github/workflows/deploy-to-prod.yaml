@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   input:
-    name: User Approval needed
+    name: Approval needed
     runs-on: ubuntu-latest
     steps:
       - uses: trstringer/manual-approval@v1

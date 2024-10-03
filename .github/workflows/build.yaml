@@ -1,6 +1,10 @@
 name: Build and Publish Docker Image
 
-on: push
+on: 
+  push:
+    branches:
+      - '*'
+      - '!main'
 
 permissions:
   contents: read
@@ -9,12 +13,23 @@ permissions:
   id-token: write
 
 jobs:
-  build_app:
+  check_tf:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Terraform checks 
+        uses: ./.github/actions/check-tf
+        with:
+         soft_fail: true
+         trivy_exit_code: '0'
+
+  build_app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo code
+        uses: actions/checkout@v3
 
       - name: Build and Publish Docker Image
         uses: ./.github/actions/build

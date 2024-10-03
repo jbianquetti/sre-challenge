@@ -10,6 +10,10 @@ inputs:
     required: true
   github_token:
     description: "GitHub Token"
+    required: true
+  trivy_exit_code:
+    description: "exit code 1: fails the pipeline, exit code 0: warns and continue."
+    required: true
 
 
 runs:
@@ -44,12 +48,12 @@ runs:
         push: true
         tags: ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
 
-    # - name: Run Trivy vulnerability scanner
-    #   uses: aquasecurity/trivy-action@0.20.0
-    #   with:
-    #     image-ref: ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
-    #     format: 'table'
-    #     exit-code: '1'
-    #     ignore-unfixed: true
-    #     vuln-type: 'os,library'
-    #     severity: 'CRITICAL,HIGH'
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        image-ref: ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
+        format: 'table'
+        exit-code: ${{ input.trivy_exit_code }}
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
