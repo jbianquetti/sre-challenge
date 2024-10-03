@@ -2,8 +2,8 @@ name: Promote to latest and deploy to PROD
 
 on:
   push:
-    branches:
-    - main
+    # branches:
+    # - main
 
 permissions:
   contents: read
@@ -79,8 +79,8 @@ jobs:
 
       - name: Terraform plan
         run: |
-          terraform plan
+          terraform plan -var sha=${{ github.sha }} -out /tmp/${{ github.sha }}
 
       - name: Terraform apply
         run: |
-          terraform apply -auto-approve
+          terraform apply /tmp/${{ github.sha }} -auto-approve

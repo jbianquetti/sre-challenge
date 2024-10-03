@@ -13,7 +13,7 @@ resource "helm_release" "nginx_ingress" {
 
 resource "helm_release" "sre-challenge-app" {
   name              = "sre-challenge-app"
-  version           = "0.1.1"
+  version           = var.sha
   chart             = "./chart/sre-challenge-app"
   create_namespace  = true
   namespace         = "sre-challenge"
