@@ -30,8 +30,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
+      - id: auth
+        name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
           credentials_json: "${{ secrets.GOOGLE_CREDENTIALS }}"
@@ -41,7 +41,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: "Set up Cloud SDK"
+      - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
       - name: install google-cloud-sdk-gke-gcloud-auth-plugin

@@ -1,14 +1,14 @@
 
 resource "helm_release" "nginx_ingress" {
-  name = "nginx-ingress-controller"
+  name             = "nginx-ingress-controller"
   repository       = "https://charts.bitnami.com/bitnami"
   chart            = "nginx-ingress-controller"
   create_namespace = true
   namespace        = "nginx-ingress"
   set {
-    name  = "service.type"
+    name = "service.type"
     # value = "ClusterIP"
-     value = "LoadBalancer"
+    value = "LoadBalancer"
   }
 }
 
@@ -21,6 +21,6 @@ resource "helm_release" "sre-challenge-app" {
   upgrade_install   = true
   dependency_update = true
   values = [
-    "${file("./chart/sre-challenge-app/values.yaml")}"
+    file("./chart/sre-challenge-app/values.yaml")
   ]
 }

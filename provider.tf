@@ -4,8 +4,6 @@ provider "google" {
   zone    = "us-central1-a"
 }
 
-data "google_client_config" "provider" {}
-
 data "google_container_cluster" "primary" {
   name     = "${var.project_id}-gke"
   location = "us-central1-a"

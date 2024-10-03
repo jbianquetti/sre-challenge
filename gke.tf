@@ -16,6 +16,9 @@ resource "google_container_cluster" "primary" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
+    workload_metadata_config {
+      node_metadata = "GKE_METADATA_SERVER"
+    }
     disk_size_gb = 10
     oauth_scopes = [
       # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
