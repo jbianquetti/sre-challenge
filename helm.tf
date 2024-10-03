@@ -6,8 +6,7 @@ resource "helm_release" "nginx_ingress" {
   create_namespace = true
   namespace        = "nginx-ingress"
   set {
-    name = "service.type"
-    # value = "ClusterIP"
+    name  = "service.type"
     value = "LoadBalancer"
   }
 }
