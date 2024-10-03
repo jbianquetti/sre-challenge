@@ -53,7 +53,3 @@ runs:
     #     ignore-unfixed: true
     #     vuln-type: 'os,library'
     #     severity: 'CRITICAL,HIGH'
-
-    # - name: Push the Docker image
-    #   run: |
-    #     docker push ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
