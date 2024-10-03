@@ -1,6 +1,6 @@
-name: Terraform PROD Deployment
+name: Promote ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} to latest and deploy to PROD
 
-on:
+on :
   push:
     branches:
       - main

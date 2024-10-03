@@ -3,7 +3,7 @@ name: Terraform code checks
 on: push
 
 jobs:
-  check-tf:
+  check_tf:
     runs-on: ubuntu-latest
 
     steps:
