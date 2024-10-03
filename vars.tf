@@ -8,3 +8,7 @@ variable "region" {
   type        = string
 }
 
+variable "sha" {
+  description = "SHA commit"
+  type        = string
+}
