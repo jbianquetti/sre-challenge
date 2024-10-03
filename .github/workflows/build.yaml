@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build and Publish Docker Image
-        uses: ./.github/actions/build-action.yaml
+        uses: ./.github/actions/build
         with:
           repository: hello-umi/sre-challenge
           ref: main
