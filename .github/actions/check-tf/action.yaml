@@ -21,6 +21,7 @@ runs:
       uses: terraform-linters/setup-tflint@v4
 
     - name: Run TFLint
+      shell: bash
       run: tflint -f compact
 
     - name: Checkov GitHub Action
