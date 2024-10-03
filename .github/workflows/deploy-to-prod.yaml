@@ -2,8 +2,8 @@ name: Promote to latest and deploy to PROD
 
 on:
   push:
-    # branches:
-    # - main
+    branches:
+    - main
 
 permissions:
   contents: read
