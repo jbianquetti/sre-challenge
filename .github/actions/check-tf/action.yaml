@@ -1,5 +1,4 @@
 name: Terraform Code Checks
-
 description: A GitHub Action to perform Terraform code checks including formatting, linting, and security checks.
 
 inputs:

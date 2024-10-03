@@ -1,3 +1,6 @@
+# GSBucket for saving states
+# It should exists before running terraform completely 
+# terraform plan -var-file terraform.tfvars -target google_storage_bucket.terraform-bucket-for-state -out /tmp/plan
 resource "google_storage_bucket" "terraform-bucket-for-state" {
   name                        = "${var.project_id}-terraform-state"
   location                    = "US"
