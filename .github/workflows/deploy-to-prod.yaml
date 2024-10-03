@@ -1,4 +1,4 @@
-name: Promote ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} to latest and deploy to PROD
+name: Promote to latest and deploy to PROD
 
 on :
   push:
@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   gcp-deploy:
+    name: Promote ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} to latest and deploy to PROD
     runs-on: ubuntu-latest
     steps:
       - name: Build and publish ${{ github.sha }}
