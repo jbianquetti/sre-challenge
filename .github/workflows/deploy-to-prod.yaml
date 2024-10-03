@@ -17,6 +17,9 @@ jobs:
     name: Promote ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} to latest and deploy to PROD
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo code
+        uses: actions/checkout@v3
+        
       - name: Build and publish ${{ github.sha }}
         uses: ./github/workflows/build.yaml
 
@@ -25,9 +28,6 @@ jobs:
           docker pull ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
           docker tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} ghcr.io/${{ github.repository }}/sre-challenge-app:latest
           docker push ghcr.io/${{ github.repository }}/sre-challenge-app:latest
-
-      - name: Checkout repo code
-        uses: actions/checkout@v3
 
       - id: auth
         name: Authenticate to Google Cloud
