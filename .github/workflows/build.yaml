@@ -1,11 +1,6 @@
 name: Build and Publish Docker Image
 
-on: 
-  push:
-    branches:
-      - '*'
-    branches-ignore:
-      - 'main'
+on: push
 
 permissions:
   contents: read
