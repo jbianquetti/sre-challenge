@@ -17,15 +17,11 @@ jobs:
       - name: Checkout repo code
         uses: actions/checkout@v2
 
-      - name: Checkout app code
-        uses: actions/checkout@v2
+      - name: Build and Publish Docker Image
+        uses: ./.github/build-action.yaml
         with:
           repository: hello-umi/sre-challenge
-          path: ./src
           ref: main
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and Publish Docker Image
-        uses: ./.github/build.yaml
 
       # - name: Checkov GitHub Action
       #   uses: bridgecrewio/checkov-action@v12
