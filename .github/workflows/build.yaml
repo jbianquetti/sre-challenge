@@ -23,6 +23,7 @@ jobs:
 
   build_app:
     runs-on: ubuntu-latest
+    needs: [check_tf]
     steps:
       - name: Checkout repo code
         uses: actions/checkout@v3
