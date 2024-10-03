@@ -2,14 +2,8 @@ name: Build and Publish Docker Image
 
 on:
   push:
-    branches:
-      - '*'
-      - '!main'
-  pull_request:
-    branches:
-      - '*'
-      - '!main'
-
+    branches-ignore:
+      - master
 
 permissions:
   contents: read
