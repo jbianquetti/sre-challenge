@@ -8,7 +8,6 @@ permissions:
   packages: write
   attestations: write
   id-token: write
-  issues: write
 
 jobs:
   build:
@@ -57,15 +56,6 @@ jobs:
       #     ignore-unfixed: true
       #     vuln-type: 'os,library'
       #     severity: 'CRITICAL,HIGH'
-
-      # - uses: trstringer/manual-approval@v1
-      #   with:
-      #     secret: ${{ github.TOKEN }}
-      #     approvers: ${{ github.actor }}
-      #     minimum-approvals: 1
-      #     issue-title: "Tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} as latest"
-      #     issue-body: "Do you want to tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} as ghcr.io/${{ github.repository }}/sre-challenge-app:latest"
-      #     exclude-workflow-initiator-as-approver: false
 
       - name: Push the Docker image
         run: |
