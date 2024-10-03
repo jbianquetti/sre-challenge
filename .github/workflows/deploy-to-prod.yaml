@@ -1,9 +1,9 @@
 name: Promote to latest and deploy to PROD
 
-on :
+on:
   push:
-    # branches:
-      # - main
+    branches:
+    - main
 
 permissions:
   contents: read
@@ -13,6 +13,19 @@ permissions:
   id-token: write
 
 jobs:
+  input:
+    name: User Approval needed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: ${{ github.actor }}
+          minimum-approvals: 1
+          issue-title: "Deploying ${{ github.sha }} to prod"
+          issue-body: "Approve or deny the deployment of ${{ github.sha }} to prod."
+          exclude-workflow-initiator-as-approver: false
+
   promote:
     name: Promote ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} to latest and deploy to PROD
     runs-on: ubuntu-latest
@@ -32,7 +45,7 @@ jobs:
           docker pull ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
           docker tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} ghcr.io/${{ github.repository }}/sre-challenge-app:latest
           docker push ghcr.io/${{ github.repository }}/sre-challenge-app:latest
-    
+
   gcp-deploy:
     name: Deploy ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} to GKE
     needs: [promote]
@@ -67,15 +80,6 @@ jobs:
       - name: Terraform plan
         run: |
           terraform plan
-
-      - uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ github.TOKEN }}
-          approvers: ${{ github.actor }}
-          minimum-approvals: 1
-          issue-title: "Deploying ${{ github.sha }} to prod"
-          issue-body: "Review the terraform plan, then approve or deny the deployment of ${{ github.sha }} to prod."
-          exclude-workflow-initiator-as-approver: false
 
       - name: Terraform apply
         run: |
