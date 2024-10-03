@@ -15,7 +15,7 @@ jobs:
     steps:
         # GH requirement
       - name: Checkout repo code
-        uses: actions/checkout@v
+        uses: actions/checkout@v2
 
       - name: Checkout app code
         uses: actions/checkout@v2
