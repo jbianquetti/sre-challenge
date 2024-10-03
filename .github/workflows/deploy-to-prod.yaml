@@ -4,20 +4,27 @@ on:
   push:
     branches:
       - main
-  workflow_run:
-    workflows: ["Build and Publish Docker Image"]
-    types:
-      - completed
 
 permissions:
   contents: read
   issues: write
+  packages: write
+  attestations: write
+  id-token: write
 
 jobs:
   gcp-deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Build and publish ${{ github.sha }}
+        uses: ./github/workflows/build.yaml
+
+      - name: Tagging ${{ github.sha }} as lastest
+        run: |
+          docker pull ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
+          docker tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} ghcr.io/${{ github.repository }}/sre-challenge-app:latest
+          docker push ghcr.io/${{ github.repository }}/sre-challenge-app:latest
+
       - name: Checkout Git Repository
         uses: actions/checkout@v3.0.0
         with:
@@ -30,19 +37,6 @@ jobs:
           credentials_json: "${{ secrets.GOOGLE_CREDENTIALS }}"
           create_credentials_file: true
           export_environment_variables: true
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Tagging ${{ github.sha }} as lastest
-        run: |
-          docker pull ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }}
-          docker tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} ghcr.io/${{ github.repository }}/sre-challenge-app:latest
-          docker push ghcr.io/${{ github.repository }}/sre-challenge-app:latest
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
