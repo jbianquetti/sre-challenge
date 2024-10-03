@@ -2,8 +2,8 @@ name: Promote to latest and deploy to PROD
 
 on :
   push:
-    branches:
-      - main
+    # branches:
+      # - main
 
 permissions:
   contents: read
@@ -26,10 +26,8 @@ jobs:
           docker tag ghcr.io/${{ github.repository }}/sre-challenge-app:${{ github.sha }} ghcr.io/${{ github.repository }}/sre-challenge-app:latest
           docker push ghcr.io/${{ github.repository }}/sre-challenge-app:latest
 
-      - name: Checkout Git Repository
-        uses: actions/checkout@v3.0.0
-        with:
-          fetch-depth: 0
+      - name: Checkout repo code
+        uses: actions/checkout@v3
 
       - id: auth
         name: Authenticate to Google Cloud
