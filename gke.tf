@@ -3,6 +3,7 @@ resource "google_service_account" "gke" {
   display_name = "Service Account for GKE clusters"
 }
 
+# Create GKE cluster
 resource "google_container_cluster" "primary" {
   name       = "${var.project_id}-gke"
   location   = "us-central1-a"
