@@ -13,6 +13,9 @@ runs:
     - name: Checkout Terraform code
       uses: actions/checkout@v3
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
     - name: Run terraform fmt
       shell: bash
       run: terraform fmt -check

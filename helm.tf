@@ -22,4 +22,9 @@ resource "helm_release" "sre-challenge-app" {
   values = [
     file("./chart/sre-challenge-app/values.yaml")
   ]
+  # use SHA instead of latest tag 
+  # set {
+  #  name = "image.tag"
+  #  value = var.sha
+  # }
 }
